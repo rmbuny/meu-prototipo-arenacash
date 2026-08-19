@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ReFlores — Arte Floral</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f5eee8;
+      color: #4d5146;
+      font-family: "DM Sans", sans-serif;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 8vw;
+      background:
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(218, 197, 184, 0.45) 0,
+          rgba(218, 197, 184, 0) 30%
+        ),
+        #f5eee8;
+    }
+
+    /* Elementos decorativos suaves */
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .circle-one {
+      width: 420px;
+      height: 420px;
+      right: -180px;
+      bottom: -160px;
+      background: #e4d8cd;
+      opacity: 0.65;
+    }
+
+    .circle-two {
+      width: 180px;
+      height: 180px;
+      left: -90px;
+      top: -70px;
+      background: #ddd8c9;
+      opacity: 0.45;
+    }
+
+    /* Conteúdo */
+
+    .content {
+      position: relative;
+      z-index: 5;
+      max-width: 580px;
+    }
+
+    .brand {
+      margin-bottom: 72px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(24px, 2.8vw, 38px);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #59604f;
+    }
+
+    .brand span {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    h1 {
+      max-width: 650px;
+      margin-bottom: 24px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(60px, 8vw, 112px);
+      line-height: 0.95;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: #4f5548;
+    }
+
+    .subtitle {
+      max-width: 430px;
+      margin-bottom: 42px;
+      font-size: clamp(16px, 1.5vw, 20px);
+      line-height: 1.65;
+      color: #77796e;
+      font-weight: 400;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 27px;
+      border: 1px solid #777d68;
+      border-radius: 40px;
+      color: #59604f;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .button:hover {
+      background: #59604f;
+      color: #f5eee8;
+    }
+
+    /* Ilustração */
+
+    .flowers {
+      position: absolute;
+      z-index: 3;
+      right: 3vw;
+      bottom: -5vh;
+      width: min(54vw, 760px);
+      height: 90vh;
+      min-height: 560px;
+    }
+
+    .flowers svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .stem {
+      fill: none;
+      stroke: #7b856d;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+    }
+
+    .leaf {
+      fill: #899276;
+      opacity: 0.82;
+    }
+
+    .petal {
+      fill: #e7b7b7;
+      stroke: #d89e9f;
+      stroke-width: 1;
+    }
+
+    .petal-light {
+      fill: #efd0cc;
+      stroke: #ddaead;
+      stroke-width: 1;
+    }
+
+    .center {
+      fill: #c79b66;
+    }
+
+    .center-dark {
+      fill: #a8784e;
+    }
+
+    .small-flower {
+      transform-origin: center;
+    }
+
+    /* Pequena assinatura visual */
+
+    .edition {
+      position: absolute;
+      left: 8vw;
+      bottom: 35px;
+      z-index: 5;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #99998f;
+    }
+
+    /* Responsivo */
+
+    @media (max-width: 800px) {
+      body {
+        overflow: auto;
+      }
+
+      .slide {
+        min-height: 100vh;
+        height: auto;
+        padding: 45px 32px 80px;
+        align-items: flex-start;
+      }
+
+      .content {
+        max-width: 100%;
+      }
+
+      .brand {
+        margin-bottom: 80px;
+      }
+
+      h1 {
+        font-size: clamp(56px, 17vw, 90px);
+      }
+
+      .flowers {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: 110%;
+        height: 420px;
+        min-height: 0;
+        margin: -20px -5% -70px auto;
+      }
+
+      .edition {
+        left: 32px;
+        bottom: 25px;
+      }
+
+      .circle-one {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="slide">
+
+    <!-- Formas decorativas -->
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+
+    <!-- Conteúdo principal -->
+    <section class="content">
+
+      <div class="brand">
+        Re<span>Flores</span>
+      </div>
+
+      <h1>
+        Flores<br>
+        para você.
+      </h1>
+
+      <p class="subtitle">
+        Arte floral criada para transformar espaços,
+        celebrar momentos e aproximar você da beleza
+        natural das flores.
+      </p>
+
+      <a href="#" class="button">
+        Flores para você
+      </a>
+
+    </section>
+
+    <!-- Ilustração de Cosmos -->
+    <div class="flowers">
+
+      <svg
+        viewBox="0 0 700 850"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Ilustração de flores cosmos"
+        role="img"
+      >
+
+        <!-- Caules -->
+        <path class="stem"
+          d="M405 850 C395 690 380 535 315 350" />
+
+        <path class="stem"
+          d="M405 850 C430 680 485 550 525 395" />
+
+        <path class="stem"
+          d="M405 850 C350 700 270 590 190 475" />
+
+        <path class="stem"
+          d="M405 850 C465 710 580 620 610 510" />
+
+        <path class="stem"
+          d="M405 850 C400 690 405 520 410 275" />
+
+        <!-- Folhas -->
+        <path class="leaf"
+          d="M356 670 C305 625 278 622 254 638 C291 654 321 667 356 670Z" />
+
+        <path class="leaf"
+          d="M438 655 C475 615 505 604 532 616 C499 636 470 648 438 655Z" />
+
+        <path class="leaf"
+          d="M335 560 C293 530 266 531 245 549 C276 561 305 565 335 560Z" />
+
+        <path class="leaf"
+          d="M480 570 C518 532 545 530 568 544 C538 559 510 568 480 570Z" />
+
+        <path class="leaf"
+          d="M383 485 C346 450 322 449 301 463 C329 477 354 484 383 485Z" />
+
+        <!-- Flor principal -->
+        <g class="small-flower">
+
+          <ellipse
+            class="petal-light"
+            cx="315"
+            cy="285"
+            rx="35"
+            ry="76"
+            transform="rotate(-35 315 285)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="315"
+            cy="285"
+            rx="35"
+            ry="76"
+            transform="rotate(35 315 285)"
+          />
+
+          <ellipse
+            class="petal-light"
+            cx="315"
+            cy="285"
+            rx="35"
+            ry="76"
+            transform="rotate(90 315 285)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="315"
+            cy="285"
+            rx="35"
+            ry="76"
+            transform="rotate(145 315 285)"
+          />
+
+          <circle
+            class="center"
+            cx="315"
+            cy="285"
+            r="27"
+          />
+
+          <circle
+            class="center-dark"
+            cx="315"
+            cy="285"
+            r="11"
+          />
+
+        </g>
+
+        <!-- Flor superior -->
+        <g>
+
+          <ellipse
+            class="petal"
+            cx="410"
+            cy="205"
+            rx="27"
+            ry="65"
+            transform="rotate(-20 410 205)"
+          />
+
+          <ellipse
+            class="petal-light"
+            cx="410"
+            cy="205"
+            rx="27"
+            ry="65"
+            transform="rotate(45 410 205)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="410"
+            cy="205"
+            rx="27"
+            ry="65"
+            transform="rotate(90 410 205)"
+          />
+
+          <ellipse
+            class="petal-light"
+            cx="410"
+            cy="205"
+            rx="27"
+            ry="65"
+            transform="rotate(145 410 205)"
+          />
+
+          <circle
+            class="center"
+            cx="410"
+            cy="205"
+            r="22"
+          />
+
+          <circle
+            class="center-dark"
+            cx="410"
+            cy="205"
+            r="9"
+          />
+
+        </g>
+
+        <!-- Flor direita -->
+        <g>
+
+          <ellipse
+            class="petal-light"
+            cx="525"
+            cy="380"
+            rx="30"
+            ry="72"
+            transform="rotate(-25 525 380)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="525"
+            cy="380"
+            rx="30"
+            ry="72"
+            transform="rotate(40 525 380)"
+          />
+
+          <ellipse
+            class="petal-light"
+            cx="525"
+            cy="380"
+            rx="30"
+            ry="72"
+            transform="rotate(90 525 380)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="525"
+            cy="380"
+            rx="30"
+            ry="72"
+            transform="rotate(145 525 380)"
+          />
+
+          <circle
+            class="center"
+            cx="525"
+            cy="380"
+            r="24"
+          />
+
+          <circle
+            class="center-dark"
+            cx="525"
+            cy="380"
+            r="10"
+          />
+
+        </g>
+
+        <!-- Flor esquerda menor -->
+        <g>
+
+          <ellipse
+            class="petal-light"
+            cx="190"
+            cy="455"
+            rx="24"
+            ry="57"
+            transform="rotate(-30 190 455)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="190"
+            cy="455"
+            rx="24"
+            ry="57"
+            transform="rotate(35 190 455)"
+          />
+
+          <ellipse
+            class="petal-light"
+            cx="190"
+            cy="455"
+            rx="24"
+            ry="57"
+            transform="rotate(90 190 455)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="190"
+            cy="455"
+            rx="24"
+            ry="57"
+            transform="rotate(145 190 455)"
+          />
+
+          <circle
+            class="center"
+            cx="190"
+            cy="455"
+            r="19"
+          />
+
+          <circle
+            class="center-dark"
+            cx="190"
+            cy="455"
+            r="8"
+          />
+
+        </g>
+
+        <!-- Flor direita inferior -->
+        <g>
+
+          <ellipse
+            class="petal-light"
+            cx="610"
+            cy="495"
+            rx="22"
+            ry="54"
+            transform="rotate(-20 610 495)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="610"
+            cy="495"
+            rx="22"
+            ry="54"
+            transform="rotate(45 610 495)"
+          />
+
+          <ellipse
+            class="petal-light"
+            cx="610"
+            cy="495"
+            rx="22"
+            ry="54"
+            transform="rotate(90 610 495)"
+          />
+
+          <ellipse
+            class="petal"
+            cx="610"
+            cy="495"
+            rx="22"
+            ry="54"
+            transform="rotate(145 610 495)"
+          />
+
+          <circle
+            class="center"
+            cx="610"
+            cy="495"
+            r="18"
+          />
+
+          <circle
+            class="center-dark"
+            cx="610"
+            cy="495"
+            r="7"
+          />
+
+        </g>
+
+      </svg>
+    </div>
+
+    <div class="edition">
+      Portfólio · Arte Floral
+    </div>
+
+  </main>
+
+</body>
+</html>
